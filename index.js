@@ -80,7 +80,8 @@ function pad(_str, _size) {
 }
 
 function repeat(str, num) {
-  return new Array(num + 1).join(str);
+  var len = num + 1;
+  return new Array(isFinite(len) ? len : 0).join(str);
 }
 function percent(part, whole) {
   return whole ? Math.round(part / whole * 100) : 100;
