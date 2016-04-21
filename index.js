@@ -22,23 +22,23 @@ function report() {
   var miss = 0;
   p('Coverage Summary:');
   var keys = Object.keys(cov);
-  var longest = Math.max.apply(null, keys.map(function(k) {
+  var longest = keys.length && Math.max.apply(null, keys.map(function(k) {
     return path.relative(cwd, k).length;
   }));
-  var header = pad('Name', -longest) + '  Stmts   Miss   Cover   Missing';
+  var header = pad('Name', longest) + '  Stmts   Miss   Cover   Missing';
   p(header);
   p(repeat('-', header.length));
   keys.sort();
   keys.forEach(function(filename) {
     var data = stats(cov[filename]);
-    p('%s %s %s    %s%   %s', pad(path.relative(cwd, filename), -longest),
+    p('%s %s %s    %s%   %s', pad(path.relative(cwd, filename), longest),
       pad(data.stmts, 6), pad(data.miss.length, 6), pad(data.cover, 3),
       data.miss);
     stmts += data.stmts;
     miss += data.miss.length;
   });
   p(repeat('=', header.length));
-  p('%s %s %s    %s%', pad('TOTAL', -longest), pad(stmts, 6), pad(miss, 6),
+  p('%s %s %s    %s%', pad('TOTAL', longest), pad(stmts, 6), pad(miss, 6),
     pad(percent(stmts - miss, stmts), 3));
   p('');
 }
@@ -65,7 +65,7 @@ function stats(data) {
 
 function pad(_str, _size) {
   var padLeft = _size > 0;
-  var size = Math.abs(_size);
+  var size = Math.abs(Number(_size));
   var str = String(_str);
 
   if (str.length < size) {
