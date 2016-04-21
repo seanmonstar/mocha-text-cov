@@ -22,7 +22,7 @@ function report() {
   var miss = 0;
   p('Coverage Summary:');
   var keys = Object.keys(cov);
-  var longest = Math.max.apply(null, keys.map(function(k) {
+  var longest = Math.max(keys.map(function(k) {
     return path.relative(cwd, k).length;
   }));
   var header = pad('Name', -longest) + '  Stmts   Miss   Cover   Missing';
