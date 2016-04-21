@@ -1,6 +1,6 @@
 {
   "name": "mocha-text-cov",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Summary text coverage reporter for Mocha",
   "main": "index.js",
   "scripts": {
